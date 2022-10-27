@@ -18,6 +18,8 @@
       with_items:
         - "/var/lib/dpkg/lock"
         - "/var/lib/dpkg/lock-frontend"
+        - "/var/lib/apt/lists/lock"
+        - "/var/cache/apt/archives/lock"
 
 
     - name: Update the System Packages
