@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-          timeout(time: 5, unit: 'MINUTES')
+          timeout(time: 10, unit: 'MINUTES')
       }
     stages {
         stage('Vadidate maven project') {
@@ -77,13 +77,14 @@ pipeline {
 //         }
         stage('Deploy to Dev') {
             steps {
+               sh 'echo ${WORKSPACE}'
                ansiblePlaybook(
                 playbook: 'ansible/deploy-war.yml',
                 inventory: 'ansible/hosts',
                 credentialsId: 'vm-ssh',
                 colorized: true,
                 extraVars : [
-                      artifact: "/var/lib/jenkins/workspace/peline_feature_master-pipeline_2/target/hello-maven-1.0-SNAPSHOT.war",
+                      artifact: "${WORKSPACE}/target/hello-maven-1.0-SNAPSHOT.war",
                       myHosts: "devServer"
                     ]
                 )
