@@ -23,16 +23,19 @@ pipeline {
                 }
             }
         }
-//         stage('Configure VM(s) with Tomcat') {
-//             steps {
-//                ansiblePlaybook(
-//                 playbook: 'ansible/tomcat.yaml',
-//                 inventory: 'ansible/hosts',
-//                 credentialsId: 'vm-ssh',
-//                 colorized: true
-//                 )
-//             }
-//         }
+        stage('Configure VM(s) with Tomcat') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    ansiblePlaybook(
+                        playbook: 'ansible/tomcat.yaml',
+                        inventory: 'ansible/hosts',
+                        credentialsId: 'vm-ssh',
+                        colorized: true
+                        )
+                }
+
+            }
+        }
         stage('Get Latest Artifacts') {
             steps {
                rtServer (

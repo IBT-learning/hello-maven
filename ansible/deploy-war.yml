@@ -1,7 +1,7 @@
 ---
 - name: Deploy code on servers
   gather_facts: false
-  hosts: tomcatServers
+  hosts: "{{myHosts}}"
   become: yes
   remote_user: root
   become_user: root

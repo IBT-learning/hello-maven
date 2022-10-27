@@ -1,12 +1,13 @@
 ---
 - name: install and configure tomcat
-#  hosts: tomcatServers
-  hosts: "{{myHosts}}"
+  hosts: tomcatServers
+#  hosts: "{{myHosts}}"
   remote_user: root
   become: yes
 
   vars:
     tomcat_path: "/opt/tomcat10"
+    ansible_ssh_private_key_file: "~/.ssh/terraform/ibt/id_rsa"
 
 
   tasks:
