@@ -29,6 +29,10 @@
         force_apt_get: yes
 
     - name: Create a Tomcat Group
+      user:
+        name: tomcat
+
+    - name: Create a Tomcat Group
       group:
         name: tomcat
 
