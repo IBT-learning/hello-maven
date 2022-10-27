@@ -35,6 +35,12 @@ pipeline {
 //         }
         stage('Get Latest Artifacts') {
             steps {
+//                script {
+//
+//                    def metadata = new XmlSlurper().parse("https://dl.bintray.com/kdabir/glide/io/github/kdabir/glide/glide-gradle-plugin/maven-metadata.xml")
+//                    println metadata.versioning.latest
+//                    println metadata.versioning.versions.version*.text()
+                 }
                rtServer (
                   id: 'ibt-artifactory',
                   url: 'https://ibtlearning.jfrog.io/artifactory',
@@ -50,7 +56,7 @@ pipeline {
                   spec: '''{
                         "files": [
                           {
-                            "pattern": "ibt-libs-snapshot-local/com/ibt/app/hello-maven/1.0-SNAPSHOT/hello-maven-*.war",
+                            "pattern": "ibt-libs-snapshot-local/com/ibt/app/hello-maven/1.0-[SNAPSHOT]/hello-maven-1.0-[SNAPSHOT].war",
 
                             "target": "artifacts/"
                           }
@@ -58,12 +64,7 @@ pipeline {
                   }''',
 
               )
-              script {
 
-                def metadata = new XmlSlurper().parse("https://dl.bintray.com/kdabir/glide/io/github/kdabir/glide/glide-gradle-plugin/maven-metadata.xml")
-                println metadata.versioning.latest
-                println metadata.versioning.versions.version*.text()
-              }
 //                withCredentials([usernamePassword(credentialsId: "jfrog-jenkins", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
 //                   sh '''
 //                      # Artifactory location
