@@ -1,7 +1,10 @@
 pipeline {
     agent any
+    options {
+          timeout(time: 2, unit: 'MINUTES')
+      }
     stages {
-        stage('Vadidate mavn project') {
+        stage('Vadidate maven project') {
             steps {
                 sh "mvn validate"
             }
