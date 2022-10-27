@@ -4,50 +4,50 @@ pipeline {
           timeout(time: 5, unit: 'MINUTES')
       }
     stages {
-//         stage('Vadidate maven project') {
-//             steps {
-//                 sh "mvn validate"
-//             }
-//         }
-//         stage('Run maven test') {
-//             steps {
-//                 sh "mvn test"
-//             }
-//         }
-//         stage('Run clean install') {
-//             steps {
-//                 sh "mvn clean install"
-//             }
-//         }
-//          // Running sonarqube
-//         stage('Sonarqube Test') {
-//             environment {
-//                scannerHome = tool 'ibt-sonarqube';
-//             }
-//             steps {
-//                 withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-//                 sh "${scannerHome}/bin/sonar-scanner"
-//               }
-//             }
-//         }
-//         stage ('OWASP Dependency-Check Vulnerabilities') {
-//             steps {
-//                 dependencyCheck additionalArguments: '''
-//                     -o "./"
-//                     -s "./"
-//                     -f "ALL"
-//                     --prettyPrint''', odcInstallation: 'dependency-check'
-//
-//                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-//             }
-//         }
-//         stage('Push package to Jfrog') {
-//             steps {
-//                 configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
-//                     sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
-//                 }
-//             }
-//         }
+        stage('Vadidate maven project') {
+            steps {
+                sh "mvn validate"
+            }
+        }
+        stage('Run maven test') {
+            steps {
+                sh "mvn test"
+            }
+        }
+        stage('Run clean install') {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+         // Running sonarqube
+        stage('Sonarqube Test') {
+            environment {
+               scannerHome = tool 'ibt-sonarqube';
+            }
+            steps {
+                withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+              }
+            }
+        }
+        stage ('OWASP Dependency-Check Vulnerabilities') {
+            steps {
+                dependencyCheck additionalArguments: '''
+                    -o "./"
+                    -s "./"
+                    -f "ALL"
+                    --prettyPrint''', odcInstallation: 'dependency-check'
+
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
+        stage('Push package to Jfrog') {
+            steps {
+                configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
+                    sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
+                }
+            }
+        }
         stage('Configure VM(s) with Tomcat') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
