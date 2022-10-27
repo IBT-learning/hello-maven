@@ -15,9 +15,9 @@
       file:
         path: "{{ item }}"
         state: absent
-        with_items:
-          - "/var/lib/dpkg/lock"
-          - "/var/lib/dpkg/lock-frontend"
+      with_items:
+        - "/var/lib/dpkg/lock"
+        - "/var/lib/dpkg/lock-frontend"
 
 
     - name: Update the System Packages
