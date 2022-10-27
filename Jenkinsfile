@@ -23,5 +23,25 @@ pipeline {
                 }
             }
         }
+        stage('Configure VM(s) with Tomcat') {
+            steps {
+               ansiblePlaybook(
+                playbook: 'ansible/tomcat.yaml',
+                inventory: 'ansible/hosts',
+                credentialsId: 'vm-ssh',
+                colorized: true
+                )
+            }
+        }
+        stage('Deploy Code') {
+            steps {
+               ansiblePlaybook(
+                playbook: 'ansible/deploy-war.yaml',
+                inventory: 'ansible/hosts',
+                credentialsId: 'vm-ssh',
+                colorized: true
+                )
+            }
+        }
     }
 }

@@ -1,0 +1,21 @@
+---
+- name: Deploy code on servers
+  gather_facts: false
+  hosts: tomcatServers
+  become: yes
+  remote_user: root
+  become_user: root
+  tasks:
+
+    - name: Copy war file
+      copy:
+        src: /var/lib/jenkins/workspace/lo-maven_feature_master-pipeline/target/hello-maven-1.0-SNAPSHOT.jar
+        dest: /opt/tomcat10/webapps/
+        mode: 0755
+
+    - name: Start and Enable Tomcat 10 on sever
+      systemd:
+        name: tomcat
+        state: started
+        daemon_reload: true
+
