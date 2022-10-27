@@ -50,7 +50,7 @@ pipeline {
                   spec: '''{
                         "files": [
                           {
-                            "pattern": "ibt-libs-snapshot-local/com/ibt/app/hello-maven/1.0-[SNAPSHOT]/hello-maven-1.0-[SNAPSHOT].war",
+                            "pattern": "ibt-libs-snapshot-local/com/ibt/app/hello-maven/[SNAPSHOT]/hello-maven-[SNAPSHOT].war",
 
                             "target": "artifacts/"
                           }
