@@ -4,50 +4,50 @@ pipeline {
           timeout(time: 5, unit: 'MINUTES')
       }
     stages {
-        stage('Vadidate maven project') {
-            steps {
-                sh "mvn validate"
-            }
-        }
-        stage('Run maven test') {
-            steps {
-                sh "mvn test"
-            }
-        }
-        stage('Run clean install') {
-            steps {
-                sh "mvn clean install"
-            }
-        }
-         // Running sonarqube
-        stage('Sonarqube Test') {
-            environment {
-               scannerHome = tool 'ibt-sonarqube';
-            }
-            steps {
-                withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-                sh "${scannerHome}/bin/sonar-scanner"
-              }
-            }
-        }
-        stage ('OWASP Dependency-Check Vulnerabilities') {
-            steps {
-                dependencyCheck additionalArguments: '''
-                    -o "./"
-                    -s "./"
-                    -f "ALL"
-                    --prettyPrint''', odcInstallation: 'dependency-check'
-
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-            }
-        }
-        stage('Push package to Jfrog') {
-            steps {
-                configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
-                }
-            }
-        }
+//         stage('Vadidate maven project') {
+//             steps {
+//                 sh "mvn validate"
+//             }
+//         }
+//         stage('Run maven test') {
+//             steps {
+//                 sh "mvn test"
+//             }
+//         }
+//         stage('Run clean install') {
+//             steps {
+//                 sh "mvn clean install"
+//             }
+//         }
+//          // Running sonarqube
+//         stage('Sonarqube Test') {
+//             environment {
+//                scannerHome = tool 'ibt-sonarqube';
+//             }
+//             steps {
+//                 withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+//                 sh "${scannerHome}/bin/sonar-scanner"
+//               }
+//             }
+//         }
+//         stage ('OWASP Dependency-Check Vulnerabilities') {
+//             steps {
+//                 dependencyCheck additionalArguments: '''
+//                     -o "./"
+//                     -s "./"
+//                     -f "ALL"
+//                     --prettyPrint''', odcInstallation: 'dependency-check'
+//
+//                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+//             }
+//         }
+//         stage('Push package to Jfrog') {
+//             steps {
+//                 configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
+//                     sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
+//                 }
+//             }
+//         }
         stage('Configure VM(s) with Tomcat') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -61,35 +61,7 @@ pipeline {
 
             }
         }
-        stage('Get Latest Artifacts') {
-            steps {
-               rtServer (
-                  id: 'ibt-artifactory',
-                  url: 'https://ibtlearning.jfrog.io/artifactory',
-                  // If you're using username and password:
-//                   username: 'user',
-//                   password: 'password',
-                  // If you're using Credentials ID:
-                  credentialsId: 'jfrog-jenkins',
 
-              )
-              rtDownload (
-                  serverId: 'ibt-artifactory',
-                  spec: '''{
-                        "files": [
-                          {
-                            "pattern": "ibt-libs-snapshot-local/com/ibt/app/hello-maven/[SNAPSHOT]/hello-maven-[SNAPSHOT].war",
-
-                            "target": "artifacts/"
-                          }
-                        ]
-                  }''',
-
-              )
-
-            }
-
-        }
 //         stage('Deploy Code') {
 //             steps {
 //                ansiblePlaybook(
