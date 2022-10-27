@@ -9,7 +9,7 @@
 
     - name: Copy war file
       copy:
-        src: /var/lib/jenkins/workspace/peline_feature_master-pipeline_2/target/hello-maven-1.0-SNAPSHOT.war
+        src: {{ artifact }}
         dest: /opt/tomcat10/webapps/
         mode: 0755
 

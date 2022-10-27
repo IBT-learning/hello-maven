@@ -92,7 +92,10 @@ pipeline {
                 playbook: 'ansible/deploy-war.yml',
                 inventory: 'ansible/hosts',
                 credentialsId: 'vm-ssh',
-                colorized: true
+                colorized: true,
+                extraVars : [
+                      artifact: "/var/lib/jenkins/workspace/peline_feature_master-pipeline_2/target/hello-maven-1.0-SNAPSHOT.war",
+                    ]
                 )
             }
         }
