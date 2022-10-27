@@ -25,6 +25,7 @@
     - name: Update the System Packages
       apt:
         upgrade: yes
+        update_cache: yes
         force_apt_get: yes
 
     - name: Create a Tomcat Group
