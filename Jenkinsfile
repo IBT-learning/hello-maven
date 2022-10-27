@@ -108,7 +108,7 @@ pipeline {
                 credentialsId: 'vm-ssh',
                 colorized: true,
                 extraVars : [
-                      artifact: "/var/lib/jenkins/workspace/peline_feature_master-pipeline_2/target/hello-maven-1.0-SNAPSHOT.war",
+                      artifact: "${WORKSPACE}/target/hello-maven-1.0-SNAPSHOT.war",
                       myHosts: "prodServer"
                     ]
                 )
