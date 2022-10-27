@@ -38,7 +38,7 @@ pipeline {
                sh '''
                # Artifactory location
                server=https://ibtlearning.jfrog.io/artifactory
-               repo=snapshot
+               repo=ibt-libs-snapshot-local
 
                # Maven artifact location
                name=hello-maven
