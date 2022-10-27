@@ -87,7 +87,7 @@ pipeline {
                 colorized: true,
                 extraVars : [
                       artifact: "/var/lib/jenkins/workspace/peline_feature_master-pipeline_2/target/hello-maven-1.0-SNAPSHOT.war",
-                      devServer: "devServer"
+                      myHosts: "devServer"
                     ]
                 )
             }
@@ -111,7 +111,7 @@ pipeline {
                 colorized: true,
                 extraVars : [
                       artifact: "/var/lib/jenkins/workspace/peline_feature_master-pipeline_2/target/hello-maven-1.0-SNAPSHOT.war",
-                      devServer: "prodServer"
+                      myHosts: "prodServer"
                     ]
                 )
             }
