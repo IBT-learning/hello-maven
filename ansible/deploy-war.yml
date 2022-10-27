@@ -9,7 +9,7 @@
 
     - name: Copy war file
       copy:
-        src: {{ artifact }}
+        src: "{{ artifact }}"
         dest: /opt/tomcat10/webapps/
         mode: 0755
 
