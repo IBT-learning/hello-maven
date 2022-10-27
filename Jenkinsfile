@@ -35,29 +35,42 @@ pipeline {
 //         }
         stage('Get Latest Artifacts') {
             steps {
-               withCredentials([usernamePassword(credentialsId: "jfrog-jenkins", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
-                  sh '''
-                     # Artifactory location
-                     server=https://ibtlearning.jfrog.io/artifactory
-                     repo=ibt-libs-snapshot-local
+               rtServer (
+                  id: 'ibt-artifactory',
+                  url: 'https://ibtlearning.jfrog.io/artifactory',
+                  // If you're using username and password:
+//                   username: 'user',
+//                   password: 'password',
+                  // If you're using Credentials ID:
+                  credentialsId: 'jfrog-jenkins',
 
-                     # Maven artifact location
-                     name=hello-maven
-                     artifact=com/ibt/app/$name
-                     path=$server/$repo/$artifact
-                     version=$(curl -u "$USERNAME:$PASSWORD $path?lastModified" | jq -r '.uri')
-                     build=$(curl -u $USERNAME:$PASSWORD $path/$version/maven-metadata.xml | grep '<value>' | head -1 | sed "s/.*<value>([^<]*)</value>.*/1/")
-                     war=$name-$build.war
-                     url=$path/$version/$war
+              )
+//                withCredentials([usernamePassword(credentialsId: "jfrog-jenkins", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+//                   sh '''
+//                      # Artifactory location
+//                      server=https://ibtlearning.jfrog.io/artifactory
+//                      repo=ibt-libs-snapshot-local
+//
+//                      # Maven artifact location
+//                      name=hello-maven
+//                      artifact=com/ibt/app/$name
+//                      path=$server/$repo/$artifact
+//                      version=$(curl -u "$USERNAME:$PASSWORD $path?lastModified" | jq -r '.uri')
+//                      build=$(curl -u $USERNAME:$PASSWORD $path/$version/maven-metadata.xml | grep '<value>' | head -1 | sed "s/.*<value>([^<]*)</value>.*/1/")
+//                      war=$name-$build.war
+//                      url=$path/$version/$war
+//
+//                      # Download
+//                      echo $url
+//                      wget -q -N $url
+//
+//                      '''
+//                }
 
-                     # Download
-                     echo $url
-                     wget -q -N $url
-
-                     '''
-               }
 
             }
+
+
         }
         stage('Deploy Code') {
             steps {
