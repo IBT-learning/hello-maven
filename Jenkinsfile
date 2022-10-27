@@ -58,6 +58,12 @@ pipeline {
                   }''',
 
               )
+              script {
+
+                def metadata = new XmlSlurper().parse("https://dl.bintray.com/kdabir/glide/io/github/kdabir/glide/glide-gradle-plugin/maven-metadata.xml")
+                println metadata.versioning.latest
+                println metadata.versioning.versions.version*.text()
+              }
 //                withCredentials([usernamePassword(credentialsId: "jfrog-jenkins", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
 //                   sh '''
 //                      # Artifactory location
