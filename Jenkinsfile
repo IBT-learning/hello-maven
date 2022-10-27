@@ -45,6 +45,18 @@ pipeline {
                   credentialsId: 'jfrog-jenkins',
 
               )
+              rtDownload (
+                  serverId: 'ibt-artifactory',
+                  spec: '''{
+                        "files": [
+                          {
+                            "pattern": "libs-snapshot-local/com/ibt/app/1.0-SNAPSHOT/*.war",
+                            "target": "artifacts/"
+                          }
+                        ]
+                  }''',
+
+              )
 //                withCredentials([usernamePassword(credentialsId: "jfrog-jenkins", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
 //                   sh '''
 //                      # Artifactory location
