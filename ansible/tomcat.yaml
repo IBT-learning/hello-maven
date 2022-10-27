@@ -10,6 +10,16 @@
 
 
   tasks:
+    - name: Remove apt lock file
+
+      file:
+        path: "{{ item }}"
+        state: absent
+        with_items:
+          - "/var/lib/dpkg/lock"
+          - "/var/lib/dpkg/lock-frontend"
+
+
     - name: Update the System Packages
       apt:
         upgrade: yes
