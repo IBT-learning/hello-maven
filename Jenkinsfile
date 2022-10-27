@@ -35,12 +35,6 @@ pipeline {
 //         }
         stage('Get Latest Artifacts') {
             steps {
-//                script {
-//
-//                    def metadata = new XmlSlurper().parse("https://dl.bintray.com/kdabir/glide/io/github/kdabir/glide/glide-gradle-plugin/maven-metadata.xml")
-//                    println metadata.versioning.latest
-//                    println metadata.versioning.versions.version*.text()
-                 }
                rtServer (
                   id: 'ibt-artifactory',
                   url: 'https://ibtlearning.jfrog.io/artifactory',
