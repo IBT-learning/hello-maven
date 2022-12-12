@@ -3,7 +3,6 @@ pipeline {
     stages{
       stage('this is my work as Devops ')
         steps{
-          sh 'let trying'
+          sh 'echo "let trying"'
       }
     }
-}
