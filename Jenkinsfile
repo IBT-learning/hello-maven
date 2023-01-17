@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        VERSION = '1.3.0'
+    }
 
     stages {
         stage('Git clone') {
@@ -10,14 +13,11 @@ pipeline {
         stage('Verify') {
             steps {
                 sh 'ls -lrt'
+                sh 'echo "building ${VERSION}" '
+                sh 'echo buiding ${VERSION}'
             }
         }
         stage('Run Test') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
                     steps {
                         sh 'ls -lrt'
                     }
