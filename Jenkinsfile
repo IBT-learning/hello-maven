@@ -8,19 +8,14 @@ pipeline {
                 git branch: 'gunj-app', changelog: false, credentialsId: 'GitHub-creds', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
-        stage('Verify') {
+        stage('List files') {
             steps {
                 sh 'ls -lrt'
-                sh 'echo "building ${VERSION}" '
-                sh 'echo buiding ${VERSION}'
             }
         }
         stage('Run Test') {
                     steps {
                         sh 'ls -lrt'
-                        withCredentials([usernamePassword(credentialsId: 'GitHub-creds', passwordVariable: 'password', usernameVariable: 'username')]) {
-                            sh 'echo ${username}'
-                        }
                     }
          }
          stage('Run mvn commands') {
