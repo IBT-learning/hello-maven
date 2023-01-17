@@ -14,7 +14,10 @@ pipeline {
         }
          stage('Run mvn commands') {
             steps {
-                sh 'source ~/.bash_profile && mvn clean'
+                //sh 'source ~/.bash_profile && mvn clean'
+                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-Maven') {
+                    sh 'mvn clean'
+                }
                 
             }
             }
