@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name:'Branch', defaultValue:'master', description:'enter branch to build')
+        choice(name:'test', choices:'ice-cream, chocalte', description:'choose')
     }
 
     stages {
