@@ -10,13 +10,26 @@ pipeline {
                 git branch: '${Branch}', changelog: false, credentialsId: 'GitHub-creds', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
-        stage('List files') {
+        
+        stage('Verify') {
+            steps {
+                sh 'ls -lrt'
+            }
+        }
+        
+        stage('Build') {
             steps {
                 sh 'ls -lrt'
             }
         }
 
+
         stage('Run Test') {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            } 
                     steps {
                         sh 'ls -lrt'
                     }
