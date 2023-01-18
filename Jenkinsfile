@@ -2,24 +2,24 @@ pipeline {
     agent any
     stages {
         stage('Git clone') {
-           echo 'hi'
+           echo "hi"
         }
         
         stage('Verify') {
-            echo 'hello'
+            echo "hello"
         }
         
         stage('Build') {
-            echo 'hi there'
+            echo "hi there"
         }
 
 
         stage('Run Test') {
-            echo 'this is freda'
+            echo "this is freda"
          }
         
          stage('Run mvn commands') {
-            echo 'this is a test'
+            echo "this is a test"
             }
         }
     }
