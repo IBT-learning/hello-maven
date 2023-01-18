@@ -1,12 +1,18 @@
 pipeline {
     agent any
+    
+    parameters{
+        string(name:'Branch', defaultValue: 'master', description: 'Enter the branch to clone')
+        choice
+    }
 
     stages {
         stage('Git clone') {
             steps {
                 //echo "cloning"
-                git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
-           }
+               //git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
+            git branch: '${Branch}',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
+         }
         }
         stage('Verify') {
             steps {
@@ -29,6 +35,7 @@ pipeline {
             steps {
                 //echo "running maven commands"
                 withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-maven')
+               //withMaven(maven: 'Maven_3.8.6')
                 sh 'mvn clean'
             }
             }
