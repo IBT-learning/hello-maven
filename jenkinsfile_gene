@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-                echo "cloning"
-            }
+                //echo "cloning"
+                git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
+           }
         }
         stage('Verify') {
             steps {
@@ -26,7 +27,9 @@ pipeline {
          }
          stage('Run mvn commands') {
             steps {
-                echo "running maven commands"
+                //echo "running maven commands"
+                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-maven')
+                sh 'mvn clean'
             }
             }
         }
