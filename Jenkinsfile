@@ -1,46 +1,25 @@
 pipeline {
     agent any
-    parameters {
-        string(name:'Branch', defaultValue:'master', description:'Enter the branch to clone')
-    }
-
     stages {
         stage('Git clone') {
-            steps {
-                git branch: '${Branch}', changelog: false, credentialsId: 'GitHub-creds', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
-            }
+           echo 'hi'
         }
         
         stage('Verify') {
-            steps {
-                sh 'ls -lrt'
-            }
+            echo 'hello'
         }
         
         stage('Build') {
-            steps {
-                sh 'ls -lrt'
-            }
+            echo 'hi there'
         }
 
 
         stage('Run Test') {
-            when {
-                expression {
-                    env.BRANCH_NAME == "master"
-                }
-            } 
-                    steps {
-                        sh 'ls -lrt'
-                    }
+            echo 'this is freda'
          }
+        
          stage('Run mvn commands') {
-            steps {
-                //sh 'source ~/.bash_profile && mvn clean'
-                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-Maven') {
-                    sh 'mvn clean'
-                }
-            }
+            echo 'this is a test'
             }
         }
     }
