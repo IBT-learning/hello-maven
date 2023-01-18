@@ -19,7 +19,7 @@ pipeline {
          }
         
          stage('Run mvn commands') {
-            echo "this is a test"
+            echo "this is a test only"
             }
         }
     }
