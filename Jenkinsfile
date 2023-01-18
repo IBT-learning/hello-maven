@@ -1,9 +1,8 @@
 pipeline {
     agent any
-    parameters{
-        string(name:'Branch', defaultvalue:'master', description:'Enter the branch to cloene')
-    }    
-
+     parameters {
+        string(name:'Branch', defaultValue:'master', description:'Enter the branch to clone')
+    }
     stages {
         stage('Git clone') {
             steps {
