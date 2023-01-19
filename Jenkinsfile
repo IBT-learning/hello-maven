@@ -37,7 +37,7 @@ pipeline {
          }
          stage('Run mvn commands') {
             steps {
-                echo "running maven commands"
+                sh 'mvn clean package'
             }
             }
          stage ('OWASP Dependency-Check Vulnerabilities') {
