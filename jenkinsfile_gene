@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "cloning"
                 //git changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
-               //git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
+               git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
             //git branch: '${Branch}',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
          }
         }
@@ -32,12 +32,17 @@ pipeline {
                         sh 'ls -lrt'
                     }
          }
+         stage('Run clean install') {
+            steps {
+                sh "mvn clean install"
+            }
+        }
          stage('Run mvn commands') {
             steps {
                 echo "running maven commands"
-               // withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-maven')
+               withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-maven')
                //withMaven(maven: 'Maven_3.8.6')
-               // sh 'mvn clean'
+               sh 'mvn clean'
             }
             }
         }
