@@ -13,6 +13,17 @@ pipeline {
             }
         }
 
+        stage('Sonarqube test') {
+                    environment {
+                       scannerHome = tool 'ibt-sonarqube';
+                    }
+                    steps {
+                        withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                      }
+                    }
+                }
+
         stage('Build') {
                     steps {
                         sh 'ls -lrt'
@@ -29,5 +40,16 @@ pipeline {
                 echo "running maven commands"
             }
             }
+         stage ('OWASP Dependency-Check Vulnerabilities') {
+                     steps {
+                         dependencyCheck additionalArguments: '''
+                             -o "./"
+                             -s "./"
+                             -f "ALL"
+                             --prettyPrint''', odcInstallation: 'dependency-check'
+
+                         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                     }
+                 }
         }
     }
