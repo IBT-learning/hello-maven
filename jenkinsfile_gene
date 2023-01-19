@@ -10,7 +10,7 @@ pipeline {
         stage('Git clone') {
             steps {
                 echo "cloning"
-                git changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
+                //git changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
                //git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
             //git branch: '${Branch}',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
          }
