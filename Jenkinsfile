@@ -12,32 +12,31 @@ pipeline {
                 sh 'ls -lrt'
             }
         }
-
-        stage('Sonarqube test') {
-                    environment {
-                       scannerHome = tool 'ibt-sonarqube';
-                    }
-                    steps {
-                        withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                      }
-                    }
-                }
-
         stage('Build') {
                     steps {
-                        sh 'ls -lrt'
+                        sh 'mvn compile'
                     }
                 }
+
+        stage('Sonarqube test') {
+                            environment {
+                               scannerHome = tool 'ibt-sonarqube';
+                            }
+                            steps {
+                                withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                                sh "${scannerHome}/bin/sonar-scanner"
+                              }
+                            }
+                        }
 
         stage('Run Test') {
                     steps {
-                        sh 'ls -lrt'
+                        sh 'mvn test'
                     }
          }
          stage('Run mvn commands') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn package'
             }
             }
          stage ('OWASP Dependency-Check Vulnerabilities') {
