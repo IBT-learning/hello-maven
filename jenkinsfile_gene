@@ -1,10 +1,10 @@
 pipeline {
     agent any
     
-    //parameters{
-       // string(name:'Branch', defaultValue: 'master', description: 'Enter the branch to clone')
+    parameters{
+       string(name:'Branch', defaultValue: 'master', description: 'Enter the branch to clone')
         //choice(name: 'choose food item', choices:
-    //}
+    }
 
     stages {
         stage('Git clone') {
