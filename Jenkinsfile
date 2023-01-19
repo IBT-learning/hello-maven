@@ -36,6 +36,11 @@ This is Daniel Bundor, a DevOps Engineer in Training at IBT-Learning. Please be 
 Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
             }
         }
+             stage('My Intro') {
+            steps {
+             echo 'Daniel Bundor is a DevOps Engineer in training at IBT-Learning. He is very interested in bringing value to the DevOps community and that\'s why he has decided to spent more time developing his job-ready skills while having fun.'
+            }
+        }
 
         }
 }
