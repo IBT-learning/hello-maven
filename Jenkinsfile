@@ -2,7 +2,6 @@ pipeline {
     agent any
     parameters {
         string(name:'Branch', defaultValue:'master', description:'Enter the branch name')
-        choice()
 
     }
 
