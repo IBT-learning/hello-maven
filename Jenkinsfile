@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent UX_IBT
 
     stages {
         stage('Git clone') {
