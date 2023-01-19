@@ -34,8 +34,8 @@ pipeline {
          stage('Run mvn commands') {
             steps {
                 //echo "running maven commands"
-                //withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-maven')
-               withMaven(maven: 'Maven_3.8.6')
+                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-maven')
+               //withMaven(maven: 'Maven_3.8.6')
                 sh 'mvn clean'
             }
             }
