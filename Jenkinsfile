@@ -41,6 +41,11 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
              echo 'Daniel Bundor is a DevOps Engineer in training at IBT-Learning. He is very interested in bringing value to the DevOps community and that\'s why he has decided to spent more time developing his job-ready skills while having fun.'
             }
         }
+          stage('IBT-Learning') {
+            steps {
+             echo 'IBT-Learning is doing a very great job developing DevOps Engineers for the future. I am personally having a great time learning DevOps at IBT-Learning. Our Nov15th Co-Hort started with Adrian; an amazing guy who taught us Linux Fundamentals and Python. We are now with Gunjan; an experienced agile professional who has taught us version control using Git and GitHub, Maven; a Java project\'s build and management tool, Artifactory; a JFrog binary repository manger, and we are now learning Jenkins; an open source automation server that helps with building, testing, and deploying as well as facilitating continuous integration and continuous delivery, after which we will move onto Ansible (at the moment of this file edit)  '
+            }
+        }
 
         }
 }
