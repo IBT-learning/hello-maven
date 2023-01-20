@@ -22,7 +22,7 @@ pipeline {
 
         stage('Sonarqube scan') {
             steps {
-            sh 'echoperforminng sonar scans'
+            sh 'echo performinng sonar scans'
          }
          }
         
