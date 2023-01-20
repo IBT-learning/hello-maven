@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Verify') {
             steps {
-                sh 'ls -lrt'
+                sh 'mvn validate'
             }
         }
         stage('Build') {
@@ -17,6 +17,12 @@ pipeline {
                         sh 'mvn compile'
                     }
                 }
+
+          stage('Sonarqube scan') {
+                              steps {
+                                  sh 'performing sonar scans'
+                              }
+                       }
 
         stage('Run Test') {
                     steps {
