@@ -41,10 +41,22 @@ pipeline {
                                  //sh 'mvn test'
                                  configFileProvider([configFile('5d0920bc-97c5-4877-8aa4-2f61975fa9fc')]) {
                                      sh 'mvn package'
-                                     sh 'mvn deploy'
+                                     //sh 'mvn deploy'
                                  }
-
                              }
                   }
+
+           stage ('OWASP Dependency-Check Vulnerabilities') {
+                                steps {
+                                    dependencyCheck additionalArguments: '''
+                                        -o "./"
+                                        -s "./"
+                                        -f "ALL"
+                                        --prettyPrint''', odcInstallation: 'dependency-check'
+
+                                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                                }
+                            }
+
         }
     }
