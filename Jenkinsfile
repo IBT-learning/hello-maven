@@ -22,11 +22,11 @@ pipeline {
 
         stage('Sonarqube scan') {
             steps {
-            sh 'performinng sonar scans'
+            sh 'echoperforminng sonar scans'
          }
          }
         
-        stage('Run mvn commands') {
+        stage('Run test') {
             steps {
             echo "this is a test only"
             }
