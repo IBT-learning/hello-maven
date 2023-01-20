@@ -34,7 +34,7 @@ pipeline {
         
         stage('Run test') {
             steps {
-            echo "this is a test only"
+            sh 'mvn test'
             }
         }
         }
