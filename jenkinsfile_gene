@@ -1,19 +1,11 @@
 pipeline {
     agent any
-    
-    parameters{
-       string(name:'Branch', defaultValue: 'master', description: 'Enter the branch to clone')
-        //choice(name: 'choose food item', choices:
-    }
 
     stages {
         stage('Git clone') {
             steps {
                 echo "cloning"
-                //git changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
-               git branch: 'feature-genene',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
-            //git branch: '${Branch}',changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven'
-         }
+            }
         }
         stage('Verify') {
             steps {
@@ -32,18 +24,10 @@ pipeline {
                         sh 'ls -lrt'
                     }
          }
-         stage('Run clean install') {
-            steps {
-                sh "mvn clean install"
-            }
-        }
+         
          stage('Run mvn commands') {
             steps {
-                //echo "running maven commands"
-               withMaven(maven: 'maven_3.8.7', mavenSettingsConfig: 'for-maven') {
-               // some block
-                sh 'mvn clean package install deploy'
-            }
+                echo "running maven commands"
             }
         }
     }
