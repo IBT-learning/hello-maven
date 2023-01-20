@@ -3,25 +3,26 @@ pipeline {
     stages {
         stage('Git clone') {
            steps {
-           echo "hi"
+           echo "cloning"
         }
         }
         
         stage('Verify') {
             steps {
-            echo "hello"
+            sh 'mvn validate'
         }
         }
         
         stage('Build') {
             steps {
-            echo "hi there"
+            sh 'mvn compile'
         }
         }
 
-        stage('Run Test') {
+
+        stage('Sonarqube scan') {
             steps {
-            echo "this is freda"
+            sh 'performinng sonar scans'
          }
          }
         
