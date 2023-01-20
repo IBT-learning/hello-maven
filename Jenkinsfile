@@ -20,7 +20,10 @@ pipeline {
 
           stage('Sonarqube scan') {
                               steps {
-                                  sh 'performing sonar scans'
+                                  sh 'echo performing sonar scans'
+                                  withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                                      sh "${scannerHome}/bin/sonar-scanner"
+                                  }
                               }
                        }
 
