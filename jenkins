@@ -1,34 +1,38 @@
 pipeline {
     agent any
+parameters {
+    string(name:'branch', defaultValue:'master', description:'Enter branch name')
+}
     stages {
         stage('Git clone') {
-           steps {
-           echo "hi"
-        }
-        }
-        
-        stage('Verify') {
             steps {
-            echo "hello"
-        }
-        }
-        
-        stage('Build') {
-            steps {
-            echo "hi there"
-        }
-        }
-
-        stage('Run Test') {
-            steps {
-            echo "this is freda"
-         }
-         }
-        
-        stage('Run mvn commands') {
-            steps {
-            echo "this is a test only"
+               git branch: 'feature/cedric', credentialsId: 'ibt', url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
+        stage('Verify') {
+            steps {
+                sh 'ls -lrt'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'ls -lrt'
+                    }
+                }
+        stage('Run Test') {
+                    steps {
+                        sh 'ls -lrt'
+                    }
+         }
+         stage('Run mvn commands') {
+            steps {
+                echo "running maven commands"
+            }
+            }
+         stage('saonarqube') {
+            steps {
+                sh "echo perfoming sonar scans"
+            }
+            }
         }
     }
