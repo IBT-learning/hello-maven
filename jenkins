@@ -1,38 +1,52 @@
 pipeline {
     agent any
-parameters {
-    string(name:'branch', defaultValue:'master', description:'Enter branch name')
-}
     stages {
         stage('Git clone') {
-            steps {
-               git branch: 'feature/cedric', credentialsId: 'ibt', url: 'https://github.com/IBT-learning/hello-maven.git'
-            }
+           steps {
+           echo "cloning"
         }
+        }
+        
         stage('Verify') {
             steps {
-                sh 'ls -lrt'
-            }
+            sh 'mvn validate'
         }
+        }
+        
         stage('Build') {
             steps {
-                sh 'ls -lrt'
-                    }
-                }
-        stage('Run Test') {
-                    steps {
-                        sh 'ls -lrt'
-                    }
-         }
-         stage('Run mvn commands') {
+            sh 'mvn compile'
+        }
+        }
+
+
+        stage('Sonarqube scan') {
+                    environment {
+                                   scannerHome = tool 'ibt-sonarqube';
+                               }
+                              steps {
+                                  sh 'echo performing sonar scans'
+                                  withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                                      sh "${scannerHome}/bin/sonar-scanner"
+                                  }
+                              }
+                       }
+        
+        stage('Run test') {
             steps {
-                echo "running maven commands"
-            }
-            }
-         stage('saonarqube') {
-            steps {
-                sh "echo perfoming sonar scans"
-            }
+            sh 'mvn test'
             }
         }
+        
+        stage('deploy to artifactory') {
+            steps {
+            //sh 'mvn test'
+                configFileProvider([configFile('5d0920bc-97c5-4877-8aa4-2f61975fa9fc')]) {
+                sh 'mvn package'
+                sh 'mvn deploy'
+              }            
+            }
+        }
+        }
     }
+
