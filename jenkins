@@ -26,6 +26,9 @@ pipeline {
                                }
                               steps {
                                   sh 'echo performing sonar scans'
+                                withSonarQubeEnv(credentialsId: 'SQ-student') {
+                                    // some block
+                                }
                               }
                        }
         
