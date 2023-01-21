@@ -9,6 +9,17 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+        
+        stage('mvn install') { 
+            steps {
+                script {
+                    
+                    printBuildinfo()
+                    
+                }
+            }
+        }
+        
         stage('Deploy using Jenkins Library') { 
             steps {
                 script {
