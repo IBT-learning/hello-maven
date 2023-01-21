@@ -66,7 +66,7 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
                                     steps {withMaven(maven: 'Maven_3.8.7', mavenSettingsConfig: 'for-Maven') {
 
                                            }
-                                     sh 'mvn clean validate test package install deploy'
+                                     sh 'mvn clean install package'
                                     }
                                 }
 
