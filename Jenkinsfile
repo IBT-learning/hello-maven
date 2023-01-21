@@ -4,36 +4,30 @@ pipeline {
 
     stages {
         
-        stage('mvn install') { 
+        stage('Run mvn command') { 
             steps {
-                sh "mvn clean install"
+                mvn_commands()
             }
         }
         
-        stage('BuildInfo') { 
+        stage('Test script') { 
             steps {
                 script {
                     
-                    printBuildinfo()
+                    printBuildinfo {
+        name = "Sample Name"
+    }
                     
                 }
             }
         }
         
-        stage('Deploy using Jenkins Library') { 
+        stage('Get Timestamp') { 
             steps {
                 script {
                     
-                    //deployTomcat()
-                    
-                }
-            }
-        }
-        stage('Test Blasie Deploy Script') { 
-            steps {
-                script {
-                    
-                    deploy()
+                    def TIMESTAMP = getTimeStamp();
+                    echo "${TIMESTAMP}"
                     
                 }
             }
