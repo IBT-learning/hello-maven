@@ -53,7 +53,7 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
           stage('Run Test') {
           when {
               expression {
-                    BRANCH_NAME == 'master'
+                    env.BRANCH_NAME == 'master'
               }
 
           }
