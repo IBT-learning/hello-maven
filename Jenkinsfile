@@ -62,7 +62,7 @@ pipeline {
                         steps {
                             script {
                                 def remote = [name: 'tomcat-dev', host: '68.183.199.128', user: 'root', allowAnyHosts: true]
-                                withCredentials([sshUserPrivateKey(credentialsId: "vm-ssh", keyFileVariable: 'identity')]) {
+                                withCredentials([sshUserPrivateKey(credentialsId: "ssh-vm", keyFileVariable: 'identity')]) {
                                    remote.identityFile = identity
                                    sshPut remote: remote, from: 'target/hello-maven-2.0.0-SNAPSHOT.jar', into: '/opt/tomcat10/webapps/'
                                 }
