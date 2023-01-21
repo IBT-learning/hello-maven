@@ -58,5 +58,17 @@ pipeline {
                                 }
                             }
 
+            stage('Deploy code') {
+                        steps {
+                            script {
+                                def remote = [name: 'tomcat-dev', host: '68.183.199.128', user: 'root', allowAnyHosts: true]
+                                withCredentials([sshUserPrivateKey(credentialsId: "vm-ssh", keyFileVariable: 'identity')]) {
+                                   remote.identityFile = identity
+                                   sshPut remote: remote, from: 'target/hello-maven-1.0-SNAPSHOT.war', into: '/opt/tomcat10/webapps/'
+                                }
+                            }
+                        }
+                    }
+
         }
     }
