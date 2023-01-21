@@ -51,21 +51,19 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
              echo 'IBT-Learning is doing a very great job developing DevOps Engineers for the future. I am personally having a great time learning DevOps at IBT-Learning. Our Nov15th Co-Hort started with Adrian; an amazing guy who taught us Linux Fundamentals and Python. We are now with Gunjan; an experienced agile professional who has taught us version control using Git and GitHub, Maven; a Java project\'s build and management tool, Artifactory; a JFrog binary repository manger, and we are now learning Jenkins; an open source automation server that helps with building, testing, and deploying as well as facilitating continuous integration and continuous delivery, after which we will move onto Ansible (at the moment of this file edit)'
             }
         }
-          stage('Run Test')
-            steps {
+          stage('Run Test') {
           when {
               expression {
                     env.BRANCH_NAME == 'master'
               }
 
           }
-                     sh 'ls -lrt'
+              steps {
+                     sh 'echo ls -lrt'
                     }
                 }
                 stage('Run mvn commands') {
-                                    steps {withMaven(maven: 'Maven_3.8.7', mavenSettingsConfig: 'for-Maven') {
-
-                                           }
+                                    steps {withMaven(maven: 'Maven_3.8.7', mavenSettingsConfig: 'for-Maven')
                                      sh 'mvn clean install package'
                                     }
                                 }
