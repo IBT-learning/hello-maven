@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-                git branch: '${Branch}', changelog: false, credentialsId: 'for-github', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
+                git branch: 'feature-dan', changelog: false, credentialsId: 'for-GitHub', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
          stage('Hello') {
