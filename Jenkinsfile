@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-        stage('mvn install') { 
+        stage('BuildInfo') { 
             steps {
                 script {
                     
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     
-                    deployTomcat()
+                    //deployTomcat()
                     
                 }
             }
