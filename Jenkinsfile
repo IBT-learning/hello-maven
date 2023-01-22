@@ -13,6 +13,11 @@ pipeline {
                sh 'ls -lrt'
             }
         }
+           stage('DevOps') {
+                    steps {
+                       echo 'DevOps is amazing'
+                    }
+                }
           stage('Build') {
             steps {
                sh 'ls -lrt'
