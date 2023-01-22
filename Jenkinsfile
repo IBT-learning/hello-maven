@@ -73,4 +73,3 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
 
         }
     }
-}
