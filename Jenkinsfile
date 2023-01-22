@@ -61,7 +61,7 @@ pipeline {
                             }
         
         stage ('Deploy code to non-prod') {
-                steps { input {
+            steps  {input 
   message 'Approve to deploy upgrade to production'
 }
                     script {
