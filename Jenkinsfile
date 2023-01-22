@@ -15,8 +15,8 @@ pipeline {
                 script {
                     
                     printBuildinfo {
-        name = "Sample Name"
-    }
+                    name = "Sample Name"
+                        }
                     
                 }
             }
@@ -25,11 +25,16 @@ pipeline {
         stage('Get Timestamp') { 
             steps {
                 script {
-                    
                     def TIMESTAMP = getTimeStamp();
                     echo "${TIMESTAMP}"
                     
                 }
+            }
+        }
+        
+        stage('Run Dependency Check') { 
+            steps {
+                DependencyCheck()
             }
         }
     }
