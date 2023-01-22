@@ -66,7 +66,7 @@ pipeline {
                            def remote = [name: 'IBT-dev', host: '164.92.112.140', user: 'root', allowAnyHosts: true]
                            withCredentials([usernamePassword(credentialsId: "Freda-vmssh", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
                            remote.password = PASSWORD
-                           sshPut remote: remote, from: 'target/hello-maven-2.0.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
+                           sshPut remote: remote, from: 'target/hello-maven-1.7-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
                          }
                 }        
         }
