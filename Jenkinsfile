@@ -13,15 +13,24 @@ pipeline {
         }
         stage('Verify') {
             steps {
-                sh 'ls -lrt'
+                //sh 'ls -lrt'
+                sh 'mvn validate'
             }
         }
 
         stage('Build') {
                     steps {
-                        sh 'ls -lrt'
+                        //sh 'ls -lrt'
+                        sh 'mvn compile'
                     }
                 }
+         stage('Sonarqube scan') {
+                    steps {
+                        //sh 'ls -lrt'
+                        sh 'performing sonar scans'
+                    }
+                }
+
 
         stage('Run Test') {
                   // when {
