@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-        stage('Run mvn command') { 
+        stage('Run Sonar Scan') { 
             steps {
                 sonarScan()
             }
