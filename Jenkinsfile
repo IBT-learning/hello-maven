@@ -29,7 +29,7 @@ pipeline {
                         //sh 'ls -lrt'
                         sh 'echo performing sonar scans'
                         
-                        withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube) {
+                        withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
                                          // some block
                                          sh "${scannerHome}/bin/sonar-scanner"
                         }
