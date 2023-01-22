@@ -11,19 +11,19 @@ pipeline {
                 git branch: '${Branch}', changelog: false, credentialsId: 'for-github', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
-         stage('Hello') {
+         stage('Verify') {
             steps {
-               echo 'Hello World'
+               sh 'ls -lrt'
             }
         }
-          stage('Hi') {
+          stage('Build') {
             steps {
-               echo 'Hi, this is Daniel Bundor'
+               sh 'ls -lrt'
             }
         }
-           stage('List') {
+           stage('DevOps') {
             steps {
-             sh 'ls -lrt'
+             echo 'DevOps is more like a cultural shift to modern-day organizations. It enhances collaboration between development and operations team as well as improves cost management'
             }
         }
              stage('Arsenal') {
@@ -51,7 +51,13 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
             }
         }
          stage('Run Test') {
-                    steps {
+         when {
+             expression {
+                  env.BRANCH_NAME == 'master'
+             }
+          }
+
+             steps {
                        sh 'ls -lrt'
                     }
                 }
