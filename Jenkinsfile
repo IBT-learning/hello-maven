@@ -1,13 +1,13 @@
 pipeline {
     agent any
     parameters {
-        string(name:'feature-dan', defualtValue:'master', description:'Enter the branch name')
+        string(name:'Branch', defualtValue:'master', description:'Enter the branch name')
        }
 
        stages {
         stage('Git clone') {
             steps {
-                git branch: 'feature-dan', changelog: false, credentialsId: 'for-GitHub', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
+                git branch: '$Branch', changelog: false, credentialsId: 'for-GitHub', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
          stage('Hello') {
