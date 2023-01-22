@@ -68,6 +68,7 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
                             echo 'Hi, my name is Daniel Bundor. I am a DevOps Engineer in training at IBTLearning. I just thought it\'d be fun adding a stage to my Jenkinsfile. Thank you. Best regards,'
                  }
              }
+         }
 
         }
 }
