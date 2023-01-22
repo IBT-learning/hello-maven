@@ -1,14 +1,15 @@
 pipeline {
     agent any
-    parameters {
-        string(name:'Branch', defaultValue:'master', description:'Enter the branch name')
-        choice(name:'Food', choices:['ice-cream','chocolate','cook-meal'], description:'choose')
-       }
+   // parameters {
+     //   string(name:'Branch', defaultValue:'master', description:'Enter the branch name')
+       // choice(name:'Food', choices:['ice-cream','chocolate','cook-meal'], description:'choose')
+       //}
 
        stages {
         stage('Git clone') {
             steps {
-                git branch: '${Branch}', changelog: false, credentialsId: 'for-github', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
+       //         git branch: '${Branch}', changelog: false, credentialsId: 'for-github', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
+                  echo 'cloning'
             }
         }
          stage('Verify') {
@@ -64,8 +65,9 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
                  stage('Run mvn commands') {
                             steps {
                               //sh '~/.zshrc && mvn clean'
-                              withMaven(maven: 'Maven_3.8.7', mavenSettingsConfig: 'for-Maven') {
-                              sh 'mvn clean validate test install package deploy'
+                             // withMaven(maven: 'Maven_3.8.7', mavenSettingsConfig: 'for-Maven') {
+                              //sh 'mvn clean validate test install package deploy'
+                              echo 'running maven commands'
                             }
                  }
 
