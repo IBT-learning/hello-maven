@@ -24,6 +24,11 @@ pipeline {
                 }
 
         stage('Run Test') {
+                   when {
+                           expression {
+                                    BRANCH_NAME == 'master'
+                           }
+                    }
                     steps {
                         sh 'ls -lrt'
                     }
