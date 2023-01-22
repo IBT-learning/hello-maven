@@ -6,7 +6,7 @@ pipeline {
         
         stage('Run mvn command') { 
             steps {
-                mvn_commands()
+                sh 'mvn clean package'
             }
         }
         
