@@ -1,10 +1,14 @@
 pipeline {
     agent any
+    
+    parameters {
+        string(name:'Branch', defaultValue: 'master', description: ' Enter the branch to clone')
+    }
 
     stages {
         stage('Git clone') {
             steps {
-                git branch: 'feature-genene', changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
+                git branch: '${Branch}', changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
         stage('Verify') {
