@@ -24,23 +24,23 @@ pipeline {
                 }
 
         stage('Run Test') {
-                   when {
-                           expression {
-                                    env.BRANCH_NAME == 'master'
-                           }
-                    }
+                  // when {
+                          // expression {
+                                  //  env.BRANCH_NAME == 'master'
+                          // }
+                   // }
                     steps {
                         sh 'ls -lrt'
                     }
          }
          
-         stage('Run mvn commands') {
-            steps {
-                withMaven(maven: 'maven_3.8.7', mavenSettingsConfig: 'for-maven') {
+        // stage('Run mvn commands') {
+           // steps {
+              //  withMaven(maven: 'maven_3.8.7', mavenSettingsConfig: 'for-maven') {
                 // some block
-                    sh 'mvn clean package install deploy'
-               }
-            }
-        }
+                  //  sh 'mvn clean package install deploy'
+              // }
+            //}
+        //}
     }
 } 
