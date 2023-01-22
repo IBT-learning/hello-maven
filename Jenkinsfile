@@ -27,7 +27,7 @@ pipeline {
          stage('Sonarqube scan') {
                     steps {
                         //sh 'ls -lrt'
-                        sh 'performing sonar scans'
+                        sh 'echo performing sonar scans'
                     }
                 }
 
