@@ -60,6 +60,21 @@ pipeline {
                                 }
                             }
         
+        stage('Deployment') {
+
+	            steps {
+
+	      		// Create an Approval Button with a timeout of 15minutes.
+	                timeout(time: 15, unit: "MINUTES") {
+	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
+	                }
+			
+	                echo "Initiating deployment"
+
+	            }
+
+	        }
+        
         stage ('Deploy code to non-prod') {
             steps  {
                     script {
