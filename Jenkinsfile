@@ -33,7 +33,7 @@ pipeline {
             steps {
                 withMaven(maven: 'maven_3.8.7', mavenSettingsConfig: 'for-maven') {
                 // some block
-                    sh 'mvn clean'
+                    sh 'mvn clean package install deploy'
                }
             }
         }
