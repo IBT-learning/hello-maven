@@ -61,10 +61,7 @@ pipeline {
                             }
         
         stage ('Deploy code to non-prod') {
-            steps  {input {
-  message 'Approve to deploy upgrade to production'
-}
-                   }
+            steps  {
                     script {
                            def remote = [name: 'IBT-dev', host: '164.92.112.140', user: 'root', allowAnyHosts: true]
                            withCredentials([usernamePassword(credentialsId: "Freda-vmssh", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
@@ -74,4 +71,5 @@ pipeline {
                 }        
         }
     }
-    }    
+    } 
+}
