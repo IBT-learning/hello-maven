@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name:'Branch', defaultValue:'master', description:'Enter the branch name')
+        choice(name:'Food', choices:['ice-cream','chocolate','cook-meal'], description:'choose')
        }
 
        stages {
@@ -58,7 +59,7 @@ Best regards,''', subject: 'Jenkins Email', to: 'cbundor91@gmail.com'
                             steps {
                               //sh '~/.zshrc && mvn clean'
                               withMaven(maven: 'Maven_3.8.7', mavenSettingsConfig: 'for-Maven') {
-                              sh 'mvn clean'
+                              sh 'mvn clean validate test install package deploy'
                               }
                             }
                         }
