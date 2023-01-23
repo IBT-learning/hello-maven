@@ -15,32 +15,13 @@ pipeline {
 
         stage('Build') {
                     steps {
-                        echo "bokovi is building"
-                    }
-                }
-
-        stage('Run Test') {
-                    steps {
-                        echo "bokovi is testing"
-                    }
-         }
-         stage('Run mvn commands') {
-            steps {
-                echo "running maven commands"
-            }
-         }
-
-	    stage('another test from bokovi') {
-            steps {
-                echo "running maven commands"
-            }
-          }
-         stage('third test from bokovi') {
-            steps {
-                echo "running maven commands"
+                        bat 'mvn compile'
+             
             }
           }
 	 stage('sonarqube scan by bokovi') {
+		 environment {
+                        scannerHome = tool 'ibt-sonarqube';
             steps {
                 bat 'echo running maven commands'
                  withSonarQubeEnv(credentialsId: 'SQ-student') {
