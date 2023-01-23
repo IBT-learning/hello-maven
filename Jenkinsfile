@@ -1,47 +1,39 @@
 pipeline {
     agent any
 
-       stages {
+    stages {
         stage('Git clone') {
             steps {
-                  echo 'cloning'
+                echo "cloning"
             }
         }
-
-         stage('Verify') {
+        stage('Verify') {
             steps {
-               sh 'mvn validate'
+                sh 'mvn validate'
             }
         }
-          stage('Build') {
-            steps {
-               sh 'mvn compile'
-            }
-        }
-          stage('Sonarqube scan') {
-                   environment {
-                                  scannerHome = tool 'ibt-sonarqube';
-                    }
-
+        stage('Build') {
                     steps {
-                       sh 'echo performing sonar scans'
-                       withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-                          sh "${scannerHome}/bin/sonar-scanner"
+                        sh 'mvn compile'
+                    }
+                }
+
+          stage('Sonarqube scan') {
+                    environment {
+                                   scannerHome = tool 'ibt-sonarqube';
+                               }
+                              steps {
+                                  sh 'echo performing sonar scans'
+                                  withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                                      sh "${scannerHome}/bin/sonar-scanner"
+                                  }
+                              }
                        }
+
+        stage('Run Test') {
+                    steps {
+                        sh 'mvn test'
                     }
-                }
-         stage('Run Test') {
-
-             steps {
-                       sh 'ls -lrt'
-                    }
-                }
-                 stage('Run mvn commands') {
-                            steps {
-
-                              sh 'echo running maven commands'
-                            }
-                 }
-
-        }
+         }
+       }
     }
