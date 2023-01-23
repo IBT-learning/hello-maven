@@ -23,7 +23,7 @@ pipeline {
 		 environment {
                         scannerHome = tool 'ibt-sonarqube';
             steps {
-                bat 'echo running maven commands'
+               echo "running maven commands"
                  withSonarQubeEnv(credentialsId: 'SQ-student') {
 			 bat "${scannerHome}/bin/sonar-scanner"
 }
