@@ -10,23 +10,23 @@ pipeline {
 
          stage('Verify') {
             steps {
-               sh 'ls -lrt'
+               sh 'mvn validate'
             }
         }
-           stage('DevOps') {
-                    steps {
-                       echo 'DevOps is amazing'
-                    }
-                }
           stage('Build') {
             steps {
-               sh 'ls -lrt'
+               sh 'mvn compile'
             }
         }
+          stage('Sonarqube scan') {
+                    steps {
+                       sh 'performing sonar scan'
+                    }
+                }
          stage('Run Test') {
 
              steps {
-                       sh 'ls -lrt'
+                       sh 'mvn test'
                     }
                 }
                  stage('Run mvn commands') {
