@@ -20,7 +20,7 @@ pipeline {
         }
           stage('Sonarqube scan') {
                     environment {
-                                   scannerHome = tool 'ibt-learning';
+                                   scannerHome = tool 'ibt-sonarqube';
                     }
                     steps {
                        sh 'echo performing sonar scan'
