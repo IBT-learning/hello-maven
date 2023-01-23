@@ -40,7 +40,15 @@ pipeline {
                 echo "running maven commands"
             }
           }
-
+	 stage('sonarqube scan by bokovi') {
+            steps {
+                bat 'echo running maven commands'
+                 withSonarQubeEnv(credentialsId: 'SQ-student') {
+			 bat "${scannerHome}/bin/sonar-scanner"
+}
 
         }
     }
+stage('Run Test') {
+                    steps {
+                        bat 'mvn test'
