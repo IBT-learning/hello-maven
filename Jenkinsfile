@@ -1,32 +1,24 @@
 pipeline {
     agent any
-    
-   // parameters {
-       // string(name:'Branch', defaultValue: 'master', description: ' Enter the branch to clone')
-   // }
 
     stages {
         stage('Git clone') {
             steps {
                 echo "cloning"
-                //git branch: '${Branch}', changelog: false, credentialsId: 'Github-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
             }
         }
         stage('Verify') {
             steps {
-                //sh 'ls -lrt'
                 sh 'mvn validate'
             }
         }
-
         stage('Build') {
                     steps {
-                        //sh 'ls -lrt'
                         sh 'mvn compile'
                     }
                 }
-        
-        stage('Sonarqube scan') {
+
+          stage('Sonarqube scan') {
                     environment {
                                    scannerHome = tool 'ibt-sonarqube';
                                }
@@ -38,25 +30,44 @@ pipeline {
                               }
                        }
 
-
         stage('Run Test') {
-                  // when {
-                          // expression {
-                                  //  env.BRANCH_NAME == 'master'
-                          // }
-                   // }
                     steps {
-                        sh 'ls -lrt'
+                        sh 'mvn test'
                     }
          }
-         
-        // stage('Run mvn commands') {
-           // steps {
-              //  withMaven(maven: 'maven_3.8.7', mavenSettingsConfig: 'for-maven') {
-                // some block
-                  //  sh 'mvn clean package install deploy'
-              // }
-            //}
-        //}
+
+         stage('upload to artifactory') {
+                             steps {
+                                 //sh 'mvn test'
+                                 configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
+                                     sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
+                                 }
+                             }
+                  }
+
+           stage ('OWASP Dependency-Check Vulnerabilities') {
+                                steps {
+                                    dependencyCheck additionalArguments: '''
+                                        -o "./"
+                                        -s "./"
+                                        -f "ALL"
+                                        --prettyPrint''', odcInstallation: 'dependency-check'
+
+                                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                                }
+                            }
+              stage ('Deploy code to non-prod') {
+                steps {
+                    script {
+                           def remote = [name: 'IBT-dev', host: '165.227.37.72', user: 'root', allowAnyHosts: true]
+                           withCredentials([usernamePassword(credentialsId: "ssh-vm-uname-pwd", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+                           remote.password = PASSWORD
+                           sshPut remote: remote, from: 'target/hello-maven-2.0.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
+                         }
+                }
+            }
+
+                  
+        }
     }
-} 
+}
