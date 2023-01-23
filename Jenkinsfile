@@ -23,7 +23,7 @@ pipeline {
                                    scannerHome = tool 'ibt-sonarqube';
                                }
                               steps {
-
+                                  sh 'echo performing sonar scans'
                                   withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
                                       sh "${scannerHome}/bin/sonar-scanner"
 
@@ -38,7 +38,7 @@ pipeline {
          }
            stage('Run mvn commands') {
                steps {
-                        echo 'running maven commands'
+                        sh 'echo running maven commands'
                }
            }
         }
