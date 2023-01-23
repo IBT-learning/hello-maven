@@ -19,8 +19,12 @@ pipeline {
             }
         }
           stage('Sonarqube scan') {
+                   environment {
+                                  scannerHome = tool 'ibt-sonarqube';
+                    }
+
                     steps {
-                       sh 'echo performing sonar scan'
+                       sh 'echo performing sonar scans'
                        withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
                           sh "${scannerHome}/bin/sonar-scannerHome"
                        }
