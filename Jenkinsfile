@@ -20,7 +20,7 @@ pipeline {
         }
           stage('Sonarqube scan') {
                     steps {
-                       sh 'performing sonar scan'
+                       sh 'echo performing sonar scan'
                     }
                 }
          stage('Run Test') {
