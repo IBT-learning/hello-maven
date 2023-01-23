@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+          stage('DevOps') {
+                    steps {
+                       echo 'DevOps is more like a cultural shift that enhances collaboration between development and operations in agile organizations'
+                    }
+                }
+
          stage('Verify') {
             steps {
                sh 'mvn validate'
