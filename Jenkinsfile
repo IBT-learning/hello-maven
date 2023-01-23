@@ -24,20 +24,18 @@ pipeline {
                         sh 'mvn compile'
                     }
                 }
-         stage('Sonarqube scan') {
-             environment {
-                 scannerHome = tool 'ibt-sonarqube';
-             }
-                    steps {
-                        //sh 'ls -lrt'
-                        sh 'echo performing sonar scans'
-                        
-                        withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-                                         // some block
-                                         sh "${scannerHome}/bin/sonar-scanner"
-                        }
-                    }
-                }
+        
+        stage('Sonarqube scan') {
+                    environment {
+                                   scannerHome = tool 'ibt-sonarqube';
+                               }
+                              steps {
+                                  sh 'echo performing sonar scans'
+                                  withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                                      sh "${scannerHome}/bin/sonar-scanner"
+                                  }
+                              }
+                       }
 
 
         stage('Run Test') {
