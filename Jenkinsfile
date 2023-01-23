@@ -35,6 +35,12 @@ pipeline {
                 echo "running maven commands"
             }
           }
+         stage('third test from bokovi') {
+            steps {
+                echo "running maven commands"
+            }
+          }
+
 
         }
     }
