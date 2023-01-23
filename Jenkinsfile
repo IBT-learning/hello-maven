@@ -33,13 +33,13 @@ pipeline {
          stage('Run Test') {
 
              steps {
-                       sh 'mvn test'
+                       sh 'ls -lrt'
                     }
                 }
                  stage('Run mvn commands') {
                             steps {
 
-                              echo 'running maven commands'
+                              sh 'echo running maven commands'
                             }
                  }
 
