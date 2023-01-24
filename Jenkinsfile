@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build') {
                     steps {
-                        bat 'mvn compile'
+                        sh 'mvn compile'
              
             }
           }
@@ -25,11 +25,11 @@ pipeline {
             steps {
                echo "running maven commands"
                  withSonarQubeEnv(credentialsId: 'SQ-student') {
-			 bat "${scannerHome}/bin/sonar-scanner"
+			 sh "${scannerHome}/bin/sonar-scanner"
 }
 
         }
     }
 stage('Run Test') {
                     steps {
-                        bat 'mvn test'
+                        sh 'mvn test'
