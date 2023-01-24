@@ -44,8 +44,8 @@ pipeline {
                                  }
                              }
          stage ('OWASP Dependency-Check Vulnerabilities') {
-                                steps {
-                                    dependencyCheck additionalArguments: '''
+                              steps {
+                                  dependencyCheck additionalArguments: '''
                                         -o "./"
                                         -s "./"
                                         -f "ALL"
