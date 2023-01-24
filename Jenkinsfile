@@ -33,3 +33,6 @@ pipeline {
 stage('Run Test') {
                     steps {
                         sh 'mvn test'
+		    }
+}
+	 }
