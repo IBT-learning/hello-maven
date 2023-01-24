@@ -60,7 +60,7 @@ pipeline {
                                 }
                             }
         
-        stage('Deployment') {
+        stage('Approval to deploy') {
 
 	            steps {
 
