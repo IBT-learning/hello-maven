@@ -35,6 +35,14 @@ pipeline {
                        sh 'mvn test'
                     }
                 }
+         stage('upload to artifactory') {
+             steps {
+                        configFileProvider([configFile('5d0920bc-97c5-4877-8aa4-2f61975fa9fc')]) {
+                        sh 'mvn package'
+                        sh 'mvn deploy'
+                       }
+                  }
+             }
 
         }
     }
