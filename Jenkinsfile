@@ -61,7 +61,7 @@ pipeline {
                                         def remote = [name: 'IBT-dev', host: '159.203.20.221', user: 'root', allowAnyHosts: true]
                                         withCredentials([usernamePassword(credentialsId: "Daniel", usernameVariable: 'Daniel-vmssh',passwordVariable: 'Daniel@IBT')]) {
                                         remote.password = PASSWORD
-                                        sshPut remote: remote, from: 'target/hello-maven-2.0.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
+                                        sshPut remote: remote, from: 'target/hello-maven-2.1.1-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
                                       }
                              }
                          }
