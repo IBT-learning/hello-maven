@@ -56,18 +56,18 @@ pipeline {
                                     dependencyCheckPublisher pattern: 'dependency-check-report.xml'
                                 }
                             }
-              //stage ('Deploy code to non-prod') {
-                //steps {
-                   // script {
-                           //def remote = [name: 'IBT-dev', host: '165.227.37.72', user: 'root', allowAnyHosts: true]
-                           //withCredentials([usernamePassword(credentialsId: "ssh-vm-uname-pwd", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
-                           //remote.password = PASSWORD
-                           //sshPut remote: remote, from: 'target/hello-maven-2.0.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
-                        // }
-               // }
-           // }
+              stage ('Deploy code to non-prod') {
+                steps {
+                    script {
+                           def remote = [name: 'IBT-dev', host: '137.184.222.179', user: 'root', allowAnyHosts: true]
+                           withCredentials([usernamePassword(credentialsId: "ssh-vm-uname-pwd", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+                           remote.password = PASSWORD
+                           sshPut remote: remote, from: 'target/hello-maven-2.1.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
+                         }
+                }
+            }
 
                   
-        //}
+        }
     }
 }
