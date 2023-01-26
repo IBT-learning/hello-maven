@@ -11,8 +11,6 @@ pipeline {
                  }
              }
 
-         }
-
         stage('Git clone') {
             steps {
                   echo 'cloning'
