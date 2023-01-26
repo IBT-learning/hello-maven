@@ -2,6 +2,17 @@ pipeline {
     agent any
 
        stages {
+
+
+
+        stage('My Intro') {
+         steps {
+                  echo 'Daniel Bundor is a DevOps Engineer in training at IBT-Learning. He is very interested in bringing value to the DevOps community and that\'s why he has decided to spent more time developing his job-ready skills while having fun.'
+                 }
+             }
+
+         }
+
         stage('Git clone') {
             steps {
                   echo 'cloning'
