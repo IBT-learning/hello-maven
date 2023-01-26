@@ -24,7 +24,7 @@ pipeline {
                         scannerHome = tool 'ibt-sonarqube';
             steps {
                echo "running maven commands"
-                 withSonarQubeEnv(credentialsId: 'SQ-student') {
+                 withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
 			 sh "${scannerHome}/bin/sonar-scanner"
                }
 
