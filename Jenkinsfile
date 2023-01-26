@@ -19,17 +19,19 @@ pipeline {
              
                    }
              }
-	 stage('sonarqube scan by bokovi') {
-		 environment {
-                        scannerHome = tool 'ibt-sonarqube';
+	    
+	 // Running sonarqube
+        stage('Sonarqube test') { 
+            environment {
+               scannerHome = tool 'ibt-sonarqube';
+            }
             steps {
-               echo "running maven commands"
-                 withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-			 sh "${scannerHome}/bin/sonar-scanner"
-               }
-
+                withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+              }
+            }
         }
-    }
+	    
 stage('Run Test') {
                     steps {
                         sh 'mvn test'
