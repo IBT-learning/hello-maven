@@ -40,3 +40,11 @@ stage('Run Test') {
                }
 	 }
  }	
+stage('upload to artifactory') {
+                             steps {
+                                 //sh 'mvn test'
+                                 configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
+                                     sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
+                                 }
+                             }
+                  }
