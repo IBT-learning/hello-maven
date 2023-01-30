@@ -58,5 +58,17 @@ stage('Run Test') {
                                     dependencyCheckPublisher pattern: 'dependency-check-report.xml'
                                 }
                             }
+	    
+	    stage ('Deploy code to non-prod') {
+                steps {
+                    script {
+                           def remote = [name: 'IBT-Unix', host: '159.223.96.221', user: 'root', allowAnyHosts: true]
+                           withCredentials([usernamePassword(credentialsId: " user-bokovi", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+                           remote.password = PASSWORD
+                           sshPut remote: remote, from: 'target/hello-maven-1.7-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
+                         }
+                }
+            }
 	 }
- }	
+    }	
+}
