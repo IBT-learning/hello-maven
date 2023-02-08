@@ -15,5 +15,5 @@ pipeline {
                bat 'dir '
             }
         }
-            }
         }
+    }
