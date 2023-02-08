@@ -10,9 +10,21 @@ pipeline {
 
         stage('Verify') {
             steps {
-               sh 'dir'
+               sh 'validate'
             }
         }
+
+stage('Build') {
+            steps {
+               sh 'mvn compile'
+            }
+        }
+
+        stage('Sonarqube scan') {
+                    steps {
+                       sh 'performing sonar scans'
+                    }
+                }
 
         stage('Run mvn commands') {
             steps {
