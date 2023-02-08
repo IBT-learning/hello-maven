@@ -12,5 +12,11 @@ pipeline {
                bat 'dir '
             }
         }
+        stage('Run mvn commands') {
+            steps {
+                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-Maven') {
+                    bat 'mvn clean package install deploy'
+            }
             }
         }
+     }
