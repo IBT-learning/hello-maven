@@ -14,11 +14,6 @@ pipeline {
             }
         }
 
-        stage('Build maven code') {
-                    steps {
-                       mvn install
-                    }
-                }
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands.."
