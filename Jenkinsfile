@@ -15,13 +15,5 @@ pipeline {
                bat 'dir '
             }
         }
-        stage('Run mvn commands') {
-            steps {
-                bat 'source ~/.bash_profile && mvn clean'
-                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-Maven') {
-                    bat 'mvn clean'
-                    }
-                }
-                }
             }
         }
