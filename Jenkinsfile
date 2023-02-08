@@ -13,6 +13,12 @@ pipeline {
                sh 'dir'
             }
         }
+
+        stage('Build maven code') {
+                    steps {
+                       mvn 'clean install'
+                    }
+                }
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands.."
