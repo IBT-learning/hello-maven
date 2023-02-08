@@ -35,34 +35,28 @@ pipeline {
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands.."
+                }
             }
-            }
-
         stage('Run Test') {
             steps {
                sh 'mvn test'
                  }
             }
-
         stage('Upload to artifactory') {
             steps {
-                    configFileProvider([configFile('5d0920bc-97c5-4877-8aa4-2f61975fa9fc')]) {
-                    sh 'mvn package'
-                    //sh 'mvn deploy'
-                  }
+              configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS_XML')]) {
+                sh 'mvn -U --batch-mode -s $MAVEN_SETTINGS_XML clean deploy'
+                }
+              }
             }
-        }
-
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
-                dependencyCheck additionalArguments: '''
+               dependencyCheck additionalArguments: '''
                     -o "./"
                     -s "./"
                     -f "ALL"
                     --prettyPrint''', odcInstallation: 'dependencyCheck'
-
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-
                     sh 'mvn package'
                     //sh 'mvn deploy'
                   }
