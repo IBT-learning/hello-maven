@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'Branch', defaultValue: 'master', description: 'Enter the branch to clone')
-        choice
-    }
+
     stages {
         stage('Git clone') {
             steps {
@@ -15,5 +12,5 @@ pipeline {
                bat 'dir '
             }
         }
+            }
         }
-    }
