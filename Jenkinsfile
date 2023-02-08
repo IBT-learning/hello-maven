@@ -14,15 +14,21 @@ pipeline {
             }
         }
 
-stage('Build') {
+        stage('Build') {
             steps {
                sh 'mvn compile'
             }
         }
 
         stage('Sonarqube scan') {
+                    environment {
+                        scannerName = tool 'ibt-sonarqube';
+                        }
                     steps {
                        sh 'echo performing sonar scans'
+                       withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+                       sh "${scannerHome}/bin/sonar-scanner"
+                       }
                     }
                 }
 
@@ -31,5 +37,21 @@ stage('Build') {
                 echo "running maven commands.."
             }
             }
+
+        stage('Run Test') {
+            steps {
+               sh 'mvn test'
+                 }
+            }
+
+        stage('Upload to artifactory') {
+            steps {
+                    configFileProvider([configFile(5d0920bc-97c5-4877-8aa4-2f61975fa9fc)]) {
+                    sh 'mvn package'
+                    sh 'mvn deploy'
+                  }
+            }
+        }
+
         }
     }
