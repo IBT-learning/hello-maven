@@ -10,16 +10,9 @@ pipeline {
 
         stage('Verify') {
             steps {
-               ls -lrt
+               bat 'dir'
             }
         }
-
-        stage('Build') {
-                    steps {
-                       bat 'dir'
-                    }
-                }
-
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands.."
