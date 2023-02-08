@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-                git branch: '${Branch}', changelog: false, credentialsId: 'GitHub-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
-            }
+             echo "cloning or clowning"
+             }
         }
         stage('Verify') {
             steps {
@@ -20,20 +20,13 @@ pipeline {
                 }
 
         stage('Run Test') {
-        when {
-             expression {
-                   env.BRANCH_NAME == 'master'
-              }
-             }
                     steps {
                        bat 'dir'
                     }
                 }
         stage('Run mvn commands') {
             steps {
-                withMaven(maven: 'Maven_3.8.6', mavenSettingsConfig: 'for-Maven') {
-                    bat 'mvn clean package install'
-                }
+                echo "running maven commands"
             }
         }
         }
