@@ -10,7 +10,7 @@ pipeline {
 
         stage('Verify') {
             steps {
-               bat 'dir'
+               sh 'dir'
             }
         }
         stage('Run mvn commands') {
