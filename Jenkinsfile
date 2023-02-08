@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build maven code') {
                     steps {
-                       mvn clean install
+                       mvn install
                     }
                 }
         stage('Run mvn commands') {
