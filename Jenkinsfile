@@ -22,7 +22,7 @@ stage('Build') {
 
         stage('Sonarqube scan') {
                     steps {
-                       sh 'performing sonar scans'
+                       sh 'echo performing sonar scans'
                     }
                 }
 
