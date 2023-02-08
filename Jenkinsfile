@@ -7,6 +7,7 @@ pipeline {
              echo "cloning or clowning"
              }
         }
+
         stage('Verify') {
             steps {
                bat 'dir'
@@ -19,15 +20,10 @@ pipeline {
                     }
                 }
 
-        stage('Run Test') {
-                    steps {
-                       bat 'dir'
-                    }
-                }
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands"
             }
-        }
+            }
         }
     }
