@@ -10,7 +10,7 @@ pipeline {
 
         stage('Verify') {
             steps {
-               bat 'dir'
+               ls -lrt
             }
         }
 
