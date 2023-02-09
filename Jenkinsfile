@@ -57,7 +57,6 @@ pipeline {
                     -f "ALL"
                     --prettyPrint''', odcInstallation: 'dependencyCheck'
                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-                   sh 'mvn package'
                    //sh 'mvn deploy'
                  }
                }
