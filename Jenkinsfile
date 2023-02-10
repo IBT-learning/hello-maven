@@ -31,7 +31,6 @@ pipeline {
                          }
                    }
                }
-             }
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands.."
