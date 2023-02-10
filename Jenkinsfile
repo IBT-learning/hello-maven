@@ -20,18 +20,18 @@ pipeline {
             }
         }
 
-        //stage('Sonarqube scan') {
-           //         environment {
-             //           scannerName = tool 'ibt-sonarqube';
-               //         }
-                 //   steps {
-                   //    sh 'echo performing sonar scans'
-                     //  withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
-                       //sh "${scannerHome}/bin/sonar-scanner"
-                       //}
-                    //}
-                //}
-
+        stage('Sonarqube scan') {
+         environment {
+             scannerName = tool 'ibt-sonarqube';
+                }
+             steps {
+               sh 'echo performing sonar scans'
+                 withSonarQubeEnv(credentialsId: 'SQ-student', installationName: 'IBT sonarqube') {
+               sh "${scannerHome}/bin/sonar-scanner"
+                         }
+                   }
+               }
+             }
         stage('Run mvn commands') {
             steps {
                 echo "running maven commands.."
