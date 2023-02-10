@@ -15,6 +15,8 @@ pipeline {
         stage('Build') {
                     steps {
                         sh 'mvn compile'
+                        sh 'mvn package'
+                        sh 'mvn install'
                     }
                 }
 
@@ -62,7 +64,7 @@ pipeline {
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
                            withCredentials([usernamePassword(credentialsId: "Fancy", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
                            remote.password = PASSWORD
-                           sshPut remote: remote, from: 'target/*.jar', into: '/opt/tomcat/webapps/'
+                           sshPut remote: remote, from: 'target/hello-maven 2.2.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
                          }
                 }
             }
