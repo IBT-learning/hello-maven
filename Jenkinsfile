@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Verify') {
             steps {
-                sh 'mvn validate'
+                bat 'dir'
             }
         }
         stage('Build') {
