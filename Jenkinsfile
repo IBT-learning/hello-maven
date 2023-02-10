@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-             echo "cloning or clowning"
+             echo "cloning"
              }
         }
 
