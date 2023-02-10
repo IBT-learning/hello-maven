@@ -68,7 +68,7 @@ pipeline {
                 steps {
                     script {
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
-                           withCredentials([usernamePassword(credentialsId: "Fancy", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+                           withCredentials([usernamePassword(credentialsId: 'Fancy', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                            remote.password = PASSWORD
                            sshPut remote: remote, from: 'target/hello-maven-2.2.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
                          }
