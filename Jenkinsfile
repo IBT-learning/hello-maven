@@ -60,7 +60,7 @@ pipeline {
                 steps {
                     script {
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
-                           withCredentials([usernamePassword(credentialsId: "fancy-vmssh", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+                           withCredentials([usernamePassword(credentialsId: "Fancy", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
                            remote.password = PASSWORD
                            sshPut remote: remote, from: 'target/*.jar', into: '/opt/tomcat/webapps/'
                          }
