@@ -12,14 +12,21 @@ pipeline {
                 sh 'mvn validate'
             }
         }
-        stage('Build') {
-                    steps {
-                        sh 'mvn compile'
-                        sh 'mvn package'
-                        sh 'mvn install'
+        stage('Compile') {
+            steps {
+                sh 'mvn compile'
                     }
                 }
-
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+                    }
+                }
+          stage('Install') {
+                    steps {
+                       sh 'mvn install'
+                              }
+                          }
           stage('Sonarqube scan') {
                     environment {
                                    scannerHome = tool 'ibt-sonarqube';
@@ -37,7 +44,6 @@ pipeline {
                         sh 'mvn test'
                     }
          }
-
          stage('upload to artifactory') {
                              steps {
                                  //sh 'mvn test'
@@ -64,7 +70,7 @@ pipeline {
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
                            withCredentials([usernamePassword(credentialsId: "Fancy", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
                            remote.password = PASSWORD
-                           sshPut remote: remote, from: 'target/hello-maven 2.2.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
+                           sshPut remote: remote, from: 'target/hello-maven-2.2.0-SNAPSHOT.jar', into: '/opt/tomcat/webapps/'
                          }
                 }
             }
