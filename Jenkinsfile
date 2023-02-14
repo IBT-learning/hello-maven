@@ -65,6 +65,9 @@ pipeline {
                                 }
                             }
               stage ('Deploy Code to non-prod') {
+              input{
+                  message "Do you want to proceed for production deployment?"
+                  }
                 steps {
                     script {
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
