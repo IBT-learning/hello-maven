@@ -64,7 +64,7 @@ pipeline {
                                     dependencyCheckPublisher pattern: 'dependency-check-report.xml'
                                 }
                             }
-              stage ('Deploy code to non-prod') {
+              stage ('Deploy Code to non-prod') {
                 steps {
                     script {
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
