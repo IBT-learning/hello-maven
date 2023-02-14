@@ -70,6 +70,7 @@ pipeline {
                   }
                 steps {
                     script {
+                           sh 'echo "Deploy code to non-prod"'
                            def remote = [name: 'tomcat-dev', host: '147.182.164.39', user: 'root', allowAnyHosts: true]
                            withCredentials([usernamePassword(credentialsId: 'Fancy', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                            remote.password = PASSWORD
