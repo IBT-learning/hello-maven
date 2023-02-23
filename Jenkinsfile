@@ -1,6 +1,6 @@
 pipeline {
     agent {label 'UX_IBT'}
-    tool name: 'maven', type: 'maven'
+    tool {name: 'maven', type: 'maven'}
     stages {
         stage('Git clone') {
             steps {
