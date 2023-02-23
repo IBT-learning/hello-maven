@@ -55,5 +55,12 @@ pipeline {
                     }
                 }
             }
+            stage('another publish'){
+                steps{
+                    withCredentials([file(credentialsId: 'mvn_settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                        sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
+                    }
+                }
+            }
     }
 }
