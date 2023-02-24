@@ -53,8 +53,14 @@ pipeline {
                     configFileProvider([configFile(fileId: '5d0920bc-97c5-4877-8aa4-2f61975fa9fc', variable: 'MAVEN_SETTINGS')]) {
                         sh 'mvn deploy -s $MAVEN_SETTINGS'
                     }
-
+                   }
+                   }
+              stage('Publish Artifactory (withCreds) '){
+                    steps{
+                        withCredentials([file(credentialsId: 'maven-settings-gunj', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
+                        }
+                    }
                 }
-             }
     }
 }
