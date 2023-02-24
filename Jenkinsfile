@@ -48,5 +48,11 @@ pipeline {
                                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
                                }
                            }
+             stage('Publish Artifact'){
+                steps{
+
+                    sh 'mvn deploy'
+                }
+             }
     }
 }
