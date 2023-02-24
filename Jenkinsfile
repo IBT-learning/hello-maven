@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'IBT-UX'}
     stages {
         stage('Git clone') {
             steps {
@@ -59,6 +59,8 @@ pipeline {
                     steps{
                         withCredentials([file(credentialsId: 'maven-settings-gunj', variable: 'MAVEN_SETTINGS_XML')]) {
                             sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
+                        }
+
                         }
                     }
                 }
