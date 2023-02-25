@@ -71,9 +71,8 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: "ssh-vm-uname-pwd", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
                           remote.password = PASSWORD
                           sshPut remote: remote, from: 'target/*.jar', into: '/opt/tomcat/webapps/'
-
+                       }
                     }
-
                 }
       }
  }
