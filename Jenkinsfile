@@ -65,5 +65,15 @@ pipeline {
 
                         }
                     }
+                stage('Deploy to nonP'){
+                    steps{
+                        def remote = [name: 'IBT-dev', host:'146.190.244.195', user: 'root', allowAnyHosts: true]
+                        withCredentials([usernamePassword(credentialsId: "ssh-vm-uname-pwd", usernameVariable: 'USERNAME',passwordVariable: 'PASSWORD')]) {
+                          remote.password = PASSWORD
+                          sshPut remote: remote, from: 'target/*.jar', into: '/opt/tomcat/webapps/'
+
+                    }
+
+                }
       }
  }
