@@ -2,10 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Git clone') {
+        stage('Git Clone') {
             steps {
                 echo 'Hello World'
             }
         }
+        stage('Mvn Validate') {
+                    steps {
+                        bat 'mvn validate'
+                    }
+                }
     }
  }
