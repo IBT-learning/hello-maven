@@ -7,10 +7,20 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Mvn Validate') {
+        stage('Validate') {
                     steps {
                         bat 'mvn validate'
                     }
                 }
+        stage('Compile') {
+        steps {
+        bat 'mvn compile'
+        }
+        }
+        stage('Run Test') {
+        steps {
+        bat 'mvn test'
+        }
+        }
     }
  }
