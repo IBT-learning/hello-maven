@@ -31,12 +31,12 @@ pipeline {
                                 bat 'mvn test'
                             }
                         }
-        //stage('Run mvn commands') {
-            //steps {
-            //withMaven(maven: 'Maven_3.9.0', mavenSettingsConfig: 'For-Maven') {
-                //bat 'mvn clean package install deploy'
-            //}
-            //}
-        //}
+        stage('Run mvn commands') {
+            steps {
+            withMaven(maven: 'Maven_3.9.0', mavenSettingsConfig: 'For-Maven') {
+                bat 'mvn clean package install deploy'
+            }
+            }
+        }
         }
     }
