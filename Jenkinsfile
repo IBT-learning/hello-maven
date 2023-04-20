@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Build') {
                     steps {
-                        bat 'compile'
+                        bat 'mvn compile'
                     }
                 }
         stage('Sonarqube scan') {
