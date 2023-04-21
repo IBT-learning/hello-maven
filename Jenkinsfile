@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    parameters {
-    string(name:'Branch', defaultValue:'master',description:'Enter the branch to clone')
-    }
 
     stages {
         stage('Git-Clone') {
@@ -13,29 +10,29 @@ pipeline {
         }
         stage('Verify') {
             steps {
-                bat 'mvn validate'
+                sh 'mvn validate'
             }
         }
         stage('Build') {
                     steps {
-                        bat 'mvn compile'
+                        sh 'mvn compile'
                     }
                 }
         stage('Sonarqube scan') {
                     steps {
-                        bat 'performing sonar scans'
+                        sh 'performing sonar scans'
                     }
                 }
         stage('Run Test') {
                             steps {
-                                bat 'mvn test'
+                                sh 'mvn test'
                             }
                         }
-        //stage('Run mvn commands') {
-            //steps {
-            //withMaven(maven: 'Maven_3.9.0', mavenSettingsConfig: 'For-Maven') {
-                //bat 'mvn clean package install deploy'
-            //}
+        stage('Run mvn commands') {
+            steps {
+            withMaven(maven: 'Maven_3.9.0', mavenSettingsConfig: 'For-Maven') {
+                sh 'mvn clean package install deploy'
+            }
             }
         }
         }
