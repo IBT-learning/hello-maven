@@ -9,28 +9,28 @@ pipeline {
         }
         stage('Verify') {
             steps {
-                sh 'mvn validate'
+                bat 'mvn validate'
             }
         }
         stage('Build') {
                     steps {
-                        sh 'mvn compile'
+                        bat 'mvn compile'
                     }
                 }
         stage('Sonarqube scan') {
                     steps {
-                        sh 'performing sonar scans'
+                        bat 'echo performing sonar scans'
                     }
                 }
         stage('Run Test') {
                             steps {
-                                sh 'mvn test'
+                                bat 'mvn test'
                             }
                         }
         stage('Run mvn commands') {
             steps {
             withMaven(maven: 'Maven_3.9.0', mavenSettingsConfig: 'For-Maven') {
-                sh 'mvn clean package install deploy'
+                bat 'mvn clean package install deploy'
             }
             }
         }
