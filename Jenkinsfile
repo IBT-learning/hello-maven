@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Git-Clone') {
             steps {
-                git branch: '${Branch}', changelog: false, credentialsId: 'GitHub-login', poll: false, url: 'https://github.com/IBT-learning/hello-maven.git'
                 echo 'cloning'
             }
         }
