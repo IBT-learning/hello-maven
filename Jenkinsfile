@@ -12,5 +12,10 @@ pipeline {
                 echo 'Hello there'
             }
         }
+         stage('test') {
+                    steps {
+                        echo 'testing the added jenkins file'
+                    }
+             }
     }
 }
