@@ -18,13 +18,13 @@ pipeline {
          stage('test') {
          when{
             expression {
-                $Branch_Name=='main'
+                '$Branch_Name'=='main'
             }
 
          }
-              steps {
-                        echo 'testing the added jenkins file'
-              }
+             steps {
+                    echo 'testing the added jenkins file'
+             }
          }
          stage('checkout github'){
              steps {
