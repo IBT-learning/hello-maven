@@ -25,7 +25,7 @@ pipeline {
 
                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/$Branch_Name']], extensions: [], userRemoteConfigs: [[credentialsId: 'ibt-medinat-student', url: 'https://github.com/IBT-learning/hello-maven']])
                sh 'ls -ltr'
-               echo '$Branch_Name' '$CHOICES'
+               sh 'echo $Branch_Name $CHOICES'
             }
 
          }
