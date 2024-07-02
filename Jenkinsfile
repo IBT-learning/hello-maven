@@ -19,7 +19,6 @@ pipeline {
          when{
             expression {
                 $Branch_Name=='main'
-                env.BRANCH_NAME=='main'
             }
 
          }
