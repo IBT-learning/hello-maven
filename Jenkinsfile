@@ -3,6 +3,9 @@ pipeline {
     environment {
           version='1.1.0'
         }
+      tools {
+        maven 'Maven_3.9'
+      }
     parameters {
     string(name: 'Branch_Name', defaultValue: 'main', description: 'Enter to branch you want to build...')
     choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: 'choose a number...')
@@ -19,6 +22,11 @@ pipeline {
                 echo 'Hello there'
             }
         }
+         stage('maven') {
+             steps {
+                 sh 'mvn --version'
+                 }
+             }
          stage('test') {
          when{
             expression {
