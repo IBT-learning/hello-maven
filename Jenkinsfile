@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+          version='1.1.0'
+        }
     parameters {
     string(name: 'Branch_Name', defaultValue: 'main', description: 'Enter to branch you want to build...')
     choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: 'choose a number...')
@@ -8,6 +11,7 @@ pipeline {
         stage('Hello') {
             steps {
                 echo 'Hello World'
+                echo "App version is ${version}"
             }
         }
         stage('Hi') {
