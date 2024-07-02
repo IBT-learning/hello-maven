@@ -16,6 +16,13 @@ pipeline {
             }
         }
          stage('test') {
+         when{
+            expression {
+                $Branch_Name=='main'
+                env.BRANCH_NAME=='main'
+            }
+
+         }
               steps {
                         echo 'testing the added jenkins file'
               }
