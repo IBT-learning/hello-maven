@@ -29,18 +29,15 @@ pipeline {
                        sh 'mvn test'
                    }
                }
-          stage('package'){
+         }
+         stage('test'){
                steps{
-                  withMaven(maven: 'Maven_3.9') {
-                      sh 'mvn package'
-                  }
+                   withMaven(maven: 'Maven_3.9') {
+                         sh 'mvn test'
+                   }
                }
          }
 
-
-
-
       }
-
 
 }
