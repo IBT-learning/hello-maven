@@ -10,21 +10,21 @@ pipeline {
             }
          }
          stage('Validate'){
-              step{
+              steps{
                  withMaven(maven: 'Maven_3.9') {
                      sh 'mvn validate'
                  }
               }
          }
          stage('compile'){
-               step{
+               steps{
                    withMaven(maven: 'Maven_3.9') {
                       sh 'mvn compile'
                    }
                }
          }
          stage('test'){
-               step{
+               steps{
                    withMaven(maven: 'Maven_3.9') {
                        sh 'mvn test'
                    }
