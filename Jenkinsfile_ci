@@ -34,9 +34,11 @@ pipeline {
                   environment{
                     sonarScan= tool 'sonar-scanner'
                   }
-                  withSonarQubeEnv(credentialsId: 'sonar-token', installationName:'sonar-server') {
-                                                      sh "$sonarScan/bin/sonar-scanner -Dsonar.projectKey=Ibt-maven"
-                                                    }
+                 steps{
+                   withSonarQubeEnv(credentialsId: 'sonar-token', installationName:'sonar-server') {
+                           sh "$sonarScan/bin/sonar-scanner -Dsonar.projectKey=Ibt-maven"
+                   }
+                 }
          }
          stage('package'){
                steps{
