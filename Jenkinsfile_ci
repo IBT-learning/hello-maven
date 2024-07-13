@@ -4,9 +4,14 @@ pipeline {
     }
    agent any
       stages{
+       stage('Git') {
+             steps {
+               sh 'cleanWs()'
+             }
+        }
          stage('pulling the code'){
             steps {
-                git branch: 'feature-medinat' , url: 'https://github.com/IBT-learning/hello-maven.git'
+               checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/feature-medinat']], extensions: [], userRemoteConfigs: [[credentialsId: 'ibt-medinat-student', url: 'https://github.com/IBT-learning/hello-maven']])
             }
          }
          stage('Validate'){
