@@ -1,0 +1,6 @@
+# inventory file
+
+[nodes]
+[IP_address server1]
+[IP_address server2]
+[IP_address server3]
