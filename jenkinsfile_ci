@@ -1,0 +1,12 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Github Checkout'){
+            steps{
+                git branch: 'main', changelog: false, credentialsId: 'dadah-latest-branch-cred', poll: false, url: 'https://github.com/Dadah3227/ibt-maven.git'
+            }
+        }
+    } //stages
+
+} //pipeline
